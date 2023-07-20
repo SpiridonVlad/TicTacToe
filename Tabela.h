@@ -14,6 +14,8 @@ public:
 	~Tabela();
 	void Print(vector<vector<string>> Tabla);
 	bool Add(Jucator Bolfa);
+	bool Add_Robot(Jucator Robot);
+	int Place_Robot(int pozitie,Jucator Robot);
 	void Erase(int pozitie);
 	bool Winner(Jucator& Bofla, Jucator& Mario,int& miscari);
 	void Player(Jucator* Bolfa);

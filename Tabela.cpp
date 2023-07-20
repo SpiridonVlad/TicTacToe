@@ -94,6 +94,30 @@ bool Tabela::Add(Jucator Bolfa)
 	}
 }
 
+bool Tabela::Add_Robot(Jucator Robot)
+{
+	int pozitie;
+		pozitie = 0;
+		cout << "(" << Robot.GetName() << ")";
+		pozitie = Place_Robot(pozitie, Robot);
+		for (int i = 0; i < 3; i++)
+			for (int j = 0; j < 3; j++) {
+				if (Afisare[i][j] == pozitie) {
+					if (Tabla[i][j] == "-")
+					{
+						Tabla[i][j] = Robot.GetPiesa();
+						return true;
+					}
+				}
+			}
+		return false;
+}
+
+int Tabela::Place_Robot(int pozitie, Jucator Robot)
+{
+	
+}
+
 void Tabela::Erase(int pozitie)
 {
 	for (int i = 0; i < 3; i++)

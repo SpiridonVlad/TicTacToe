@@ -11,6 +11,32 @@ void Game::Joc(Jucator* Bolfa, Jucator* Mario)
 	X_O(Bolfa, Mario);
 }
 
+void Game::Calculator(Jucator* Bolfa)
+{
+	Tabela Tabla;
+	int pozitie;
+	Jucator* Robot=new Jucator("Robot", "X");
+	Tabla.Player(Bolfa);
+	Tabla.Player(Robot);
+	int miscari = 0;
+	Tabla.Print(Tabla.GetTable());
+	while (!Tabla.Winner(*Bolfa, *Robot, miscari) && miscari < 8) {
+		while (!Tabla.Add(*Bolfa));
+		miscari++;
+		Tabla.Print(Tabla.GetTable());
+		if (!Tabla.Winner(*Bolfa, *Robot, miscari)) {
+			Tabla.Print(Tabla.GetTable());
+			while (!Tabla.Add(*Robot));
+			miscari++;
+			Tabla.Print(Tabla.GetTable());
+			Tabla.Winner(*Bolfa, *Robot, miscari);
+		}
+		else
+			return;
+	}
+	cout << "{Jocu s-a termiant}" << endl;
+}
+
 
 void Game::X_O(Jucator* Bolfa, Jucator* Mario)
 {

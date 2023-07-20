@@ -6,5 +6,7 @@ class Game
 public:
 	void X_O(Jucator* Bolfa,Jucator* Mario);
 	void Joc(Jucator* Bolfa, Jucator* Mario);
+	void Calculator(Jucator* Bolfa);
+	void 
 };
 
