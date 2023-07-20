@@ -46,7 +46,14 @@ public:
 			{
 				cout << "<--";
 				if (ok == true)
+				{
 					PvC();
+					cout << "        X^0" << endl; cout << endl;
+					cout << " <Player vs Player>"; cout << endl << endl;
+					cout << "<Player vs Computer>";
+					C.SchimbaCuloareVerde();
+					cout << "<--";
+				}
 				cout << "<Jucati impotriva calculatorului>" << endl;
 			}
 			cout << "\n\n";
@@ -116,7 +123,8 @@ public:
 
 	void PvC() {
 		Game Joc;
-		//Joc.Calculator();
+		Joc.Calculator(Jucatorii[0]);
+		system("cls");
 	}
 
 	void Exit() {

@@ -1,4 +1,4 @@
-#include "Tabela.h"
+﻿#include "Tabela.h"
 
 Tabela::Tabela()
 {
@@ -92,6 +92,202 @@ bool Tabela::Add(Jucator Bolfa)
 		cout << "Aveti grija la pozitie! (" <<e.what()<<")"<< endl;
 		return false;
 	}
+}
+
+bool Tabela::Add_Robot(Jucator Robot)
+{
+	int pozitie;
+		pozitie = 0;
+		cout << "(" << Robot.GetName() << ")";
+		pozitie = Place_Robot(pozitie, Robot);
+		for (int i = 0; i < 3; i++)
+			for (int j = 0; j < 3; j++) {
+				if (Afisare[i][j] == pozitie) {
+						Tabla[i][j] = Robot.GetPiesa();
+						return true;
+					}
+				}
+		return false;
+}
+
+int Tabela::randomValue() {
+	// Crează un generator de numere întregi distribuite uniform între 1 și 9
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis(1, 9);
+
+	// Generează și returnează o valoare aleatoare
+	return dis(gen);
+}
+
+int Tabela::Place_Robot(int pozitie, Jucator Robot)
+{
+	int count;
+	int index1 = -1,index2=-1;
+	bool ok = false;
+	while (true)
+	{
+		pozitie = randomValue();
+		for (int i = 0; i < 3; i++)
+			for (int j = 0; j < 3; j++) {
+				if (Afisare[i][j] == pozitie) {
+					if (Tabla[i][j] == "-")
+					{
+						ok = true;
+					}
+				}
+			}
+		if (ok)
+			break;
+	}
+	for(int i=0;i<2;i++)
+	{
+		if (Tabla[i][0] != "-" && Tabla[i][0] != Robot.GetPiesa() && Tabla[i][1] != "-" && Tabla[i][1] != Robot.GetPiesa())
+		{
+			index1 = i;
+			index2 = 2;
+		}
+		if (Tabla[i][1] != "-" && Tabla[i][1] != Robot.GetPiesa() && Tabla[i][2] != "-" && Tabla[i][2] != Robot.GetPiesa())
+		{
+			index1 = i;
+			index2 = 0;
+		}
+		if (Tabla[i][0] != "-" && Tabla[i][0] != Robot.GetPiesa() && Tabla[i][2] != "-" && Tabla[i][2] != Robot.GetPiesa())
+		{
+			index1 = i;
+			index2 = 1;
+		}
+
+	}
+	for (int i = 0; i < 2; i++)
+	{
+		if (Tabla[0][i] != "-" && Tabla[0][i] != Robot.GetPiesa() && Tabla[1][i] != "-" && Tabla[1][i] != Robot.GetPiesa())
+		{
+			index1 = 2;
+			index2 = i;
+		}
+		if (Tabla[1][i] != "-" && Tabla[1][i] != Robot.GetPiesa() && Tabla[2][i] != "-" && Tabla[2][i] != Robot.GetPiesa())
+		{
+			index1 = 0;
+			index2 = i;
+		}
+		if (Tabla[0][i] != "-" && Tabla[0][i] != Robot.GetPiesa() && Tabla[2][i] != "-" && Tabla[2][i] != Robot.GetPiesa())
+		{
+			index1 = 1;
+			index2 = i;
+		}
+
+	}
+
+	if (Tabla[0][0] != "-" && Tabla[0][0] != Robot.GetPiesa() && Tabla[0][0] == Tabla[1][1])
+	{
+		index1 = 2;
+		index2 = 2;
+	}
+	if (Tabla[1][1] != "-" && Tabla[1][1] != Robot.GetPiesa() && Tabla[2][2] == Tabla[1][1])
+	{
+		index1 = 0;
+		index2 = 0;
+	}
+	if (Tabla[0][0] != "-" && Tabla[0][0] != Robot.GetPiesa() && Tabla[0][0] == Tabla[2][2])
+	{
+		index1 = 1;
+		index2 = 1;
+	}
+
+	if (Tabla[0][2] != "-" && Tabla[0][2] != Robot.GetPiesa()  && Tabla[0][2] == Tabla[1][1])
+	{
+		index1 = 2;
+		index2 = 0;
+	}
+	if (Tabla[0][2] != "-" && Tabla[0][2] != Robot.GetPiesa() && Tabla[0][2] == Tabla[2][0])
+	{
+		index1 = 1;
+		index2 = 1;
+	}
+	if (Tabla[1][1] != "-" && Tabla[1][1] != Robot.GetPiesa() && Tabla[1][1] == Tabla[2][0])
+	{
+		index1 = 0;
+		index2 = 2;
+	}
+
+	for (int i = 0; i < 2; i++)
+	{
+		if (Tabla[i][0] != "-" && Tabla[i][0] == Robot.GetPiesa() && Tabla[i][1] != "-" && Tabla[i][1] != Robot.GetPiesa())
+		{
+			index1 = i;
+			index2 = 2;
+		}
+		if (Tabla[i][1] != "-" && Tabla[i][1] == Robot.GetPiesa() && Tabla[i][2] != "-" && Tabla[i][2] != Robot.GetPiesa())
+		{
+			index1 = i;
+			index2 = 0;
+		}
+		if (Tabla[i][0] != "-" && Tabla[i][0] == Robot.GetPiesa() && Tabla[i][2] != "-" && Tabla[i][2] != Robot.GetPiesa())
+		{
+			index1 = i;
+			index2 = 1;
+		}
+
+	}
+	for (int i = 0; i < 2; i++)
+	{
+		if (Tabla[0][i] != "-" && Tabla[0][i] == Robot.GetPiesa() && Tabla[1][i] != "-" && Tabla[1][i] != Robot.GetPiesa())
+		{
+			index1 = 2;
+			index2 = i;
+		}
+		if (Tabla[1][i] != "-" && Tabla[1][i] == Robot.GetPiesa() && Tabla[2][i] != "-" && Tabla[2][i] != Robot.GetPiesa())
+		{
+			index1 = 0;
+			index2 = i;
+		}
+		if (Tabla[0][i] != "-" && Tabla[0][i] == Robot.GetPiesa() && Tabla[2][i] != "-" && Tabla[2][i] != Robot.GetPiesa())
+		{
+			index1 = 1;
+			index2 = i;
+		}
+
+	}
+
+	if (Tabla[0][0] != "-" && Tabla[0][0] == Robot.GetPiesa() && Tabla[0][0] == Tabla[1][1])
+	{
+		index1 = 2;
+		index2 = 2;
+	}
+	if (Tabla[1][1] != "-" && Tabla[1][1] == Robot.GetPiesa() && Tabla[2][2] == Tabla[1][1])
+	{
+		index1 = 0;
+		index2 = 0;
+	}
+	if (Tabla[0][0] != "-" && Tabla[0][0] == Robot.GetPiesa() && Tabla[0][0] == Tabla[2][2])
+	{
+		index1 = 1;
+		index2 = 1;
+	}
+
+	if (Tabla[0][2] != "-" && Tabla[0][2] == Robot.GetPiesa() && Tabla[0][2] == Tabla[1][1])
+	{
+		index1 = 2;
+		index2 = 0;
+	}
+	if (Tabla[0][2] != "-" && Tabla[0][2] == Robot.GetPiesa() && Tabla[0][2] == Tabla[2][0])
+	{
+		index1 = 1;
+		index2 = 1;
+	}
+	if (Tabla[1][1] != "-" && Tabla[1][1] == Robot.GetPiesa() && Tabla[1][1] == Tabla[2][0])
+	{
+		index1 = 0;
+		index2 = 2;
+	}
+
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++) 
+			if (i == index1 && j == index2)
+				pozitie = Afisare[i][j];
+	
+	return pozitie;
 }
 
 void Tabela::Erase(int pozitie)
