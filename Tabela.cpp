@@ -106,7 +106,7 @@ bool Tabela::Add_Robot(Jucator Robot)
 						Tabla[i][j] = Robot.GetPiesa();
 						return true;
 					}
-				}
+			}
 		return false;
 }
 
@@ -289,6 +289,7 @@ int Tabela::Place_Robot(int pozitie, Jucator Robot)
 	
 	return pozitie;
 }
+
 
 void Tabela::Erase(int pozitie)
 {
